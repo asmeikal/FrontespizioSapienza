@@ -30,10 +30,13 @@ Ogni altro campo deve essere specificato.
 
 Il titolo viene formattato secondo le specifiche fornite dalla Sapienza: colore titolo, facolt&agrave; e corso di laurea `RGB(111,10,25)`, font arial, 20pt per titolo, 10pt per il resto, grassetto per facolt&agrave; e corso di laurea.
 Il testo &egrave; allineato a sinistra, sulla *S* del logo Sapienza.
+Le impostazioni specificate non influiscono sul resto del documento.
 
 I margini sono impostati (sx,sup,dx,inf) a 4cm, 2.75cm, 2.5cm, 1cm.
+Non influiscono sui margini nel resto del documento.
 
 I campi vengono stampati nel seguente ordine:
+
 1. Titolo tesi;
 2. Facolt&agrave;, corso di laurea, e opzionalmente cattedra;
 3. Candidato e matricola;
