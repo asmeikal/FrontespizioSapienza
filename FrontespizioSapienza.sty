@@ -1,0 +1,204 @@
+% ============================================== %
+% Author: Michele Laurenti <asmeikal@me.com>
+%
+% Simple package for thesis title pages compliant
+% to the Sapienza's requirements.
+% Reference taken from La Sapienza's website.
+%
+% Package is provided as-is.
+% ============================================== %
+
+\ProvidesPackage{FrontespizioSapienza}[2016/12/01]
+
+\RequirePackage[a4paper]{geometry}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{color}
+\RequirePackage{anyfontsize}
+\RequirePackage{ifthen}
+\RequirePackage{tabularx}
+\RequirePackage{graphicx}
+
+% Sapienza's color
+\definecolor{FSSapienzaColorRed}{RGB}{111,10,25}
+
+% set sans serif font to arial
+\renewcommand{\sfdefault}{phv}
+
+% declare default lengths
+\newlength{\FSSapienzaSpazioTitolo}
+\newlength{\FSSapienzaSpazioFacolta}
+\newlength{\FSSapienzaSpazioCandidato}
+\newlength{\FSSapienzaSpazioRelatore}
+\newlength{\FSSapienzaSpazioAnnoAccademico}
+\newlength{\FSSapienzaTabularLength}
+% set default lengths
+\setlength{\FSSapienzaSpazioTitolo}{6.15cm}
+\setlength{\FSSapienzaSpazioFacolta}{7cm}
+\setlength{\FSSapienzaSpazioCandidato}{1cm}
+\setlength{\FSSapienzaSpazioRelatore}{1cm}
+\setlength{\FSSapienzaSpazioAnnoAccademico}{.5cm}
+
+% length for advisor/co-advisor table
+\setlength{\FSSapienzaTabularLength}{0.9\textwidth}
+
+\makeatletter
+
+% commands to get info from the user
+\newcommand{\FSSTitolo}[1]{\def\@FSS@Titolo{#1}\title{#1}}
+\newcommand{\FSSFacolta}[1]{\def\@FSS@Facolta{#1}}
+\newcommand{\FSSCorso}[1]{\def\@FSS@Corso{#1}}
+\newcommand{\FSSCattedra}[1]{\def\@FSS@Cattedra{#1}}
+\newcommand{\FSSCandidato}[1]{\def\@FSS@Candidato{#1}\author{#1}}
+\newcommand{\FSSMatricola}[1]{\def\@FSS@Matricola{#1}}
+\newcommand{\FSSRelatore}[1]{\def\@FSS@Relatore{#1}}
+\newcommand{\FSSCorrelatore}[1]{\def\@FSS@Correlatore{#1}}
+\newcommand{\FSSAnnoAccademico}[1]{\def\@FSS@AnnoAccademico{#1}}
+
+% empty defaults
+\def\@FSS@Cattedra{}
+\def\@FSS@Correlatore{}
+
+% print info commands
+\def\FSSapienzaPrintTitolo{\@FSS@Titolo}
+\def\FSSapienzaPrintFacolta{\@FSS@Facolta}
+\def\FSSapienzaPrintCorso{\@FSS@Corso}
+\def\FSSapienzaPrintCattedra{\@FSS@Cattedra}
+\def\FSSapienzaPrintCandidato{\@FSS@Candidato}
+\def\FSSapienzaPrintMatricola{\@FSS@Matricola}
+\def\FSSapienzaPrintRelatore{\@FSS@Relatore}
+\def\FSSapienzaPrintCorrelatore{\@FSS@Correlatore}
+\def\FSSapienzaPrintAnnoAccademico{\@FSS@AnnoAccademico}
+
+% check if info available
+\def\skipCattedra{\equal{\@FSS@Cattedra}{}}
+\def\skipCorrelatore{\equal{\@FSS@Correlatore}{}}
+
+\makeatother
+
+\newcommand{\FSSapienzaMakeLogo}{%
+	\hspace*{-2cm}% -2cm horizontal skip to align logo with text
+	\includegraphics[width=4cm]{./logo-sapienza.eps}%
+	\par%
+}
+
+\newcommand{\FSSapienzaMakeTitolo}{%
+	\vspace{\FSSapienzaSpazioTitolo}%
+	{%
+		\fontsize{20pt}{24pt}\selectfont%
+		\noindent%
+		\sffamily%
+		\color{FSSapienzaColorRed}%
+		\FSSapienzaPrintTitolo%
+		\par%
+	}%
+}
+
+\newcommand{\FSSapienzaMakeFacoltaCorsoCattedra}{%
+	\vspace{\FSSapienzaSpazioFacolta}%
+	% facolta'
+	{%
+		\fontsize{10pt}{12pt}\selectfont%
+		\noindent%
+		\sffamily%
+		\bfseries%
+		\color{FSSapienzaColorRed}%
+		Facoltà di \FSSapienzaPrintFacolta%
+		\par%
+		% corso di laurea
+		\fontsize{10pt}{12pt}\selectfont%
+		\noindent%
+		\sffamily%
+		\bfseries%
+		\color{FSSapienzaColorRed}%
+		Corso di laurea in \FSSapienzaPrintCorso%
+		\par%
+	}%
+	% cattedra (opzionale)
+	\ifthenelse{\skipCattedra}{}{%
+		{%
+			\fontsize{10pt}{12pt}\selectfont%
+			\noindent%
+			\sffamily%
+			Cattedra di \FSSapienzaPrintCattedra%
+			\par%
+		}%
+	}%
+}
+
+\newcommand{\FSSapienzaMakeCandidato}{%
+	\vspace{\FSSapienzaSpazioCandidato}%
+	{%
+		\fontsize{10pt}{12pt}\selectfont%
+		\noindent%
+		\sffamily%
+		\FSSapienzaPrintCandidato%
+		\protect\newline%
+		\FSSapienzaPrintMatricola%
+		\par%
+	}%
+}
+
+\newcommand{\FSSapienzaMakeRelatoreCorrelatore}{%
+	\vspace{\FSSapienzaSpazioRelatore}%
+	\noindent%
+	\ifthenelse{\skipCorrelatore}{%
+	{%
+		\fontsize{10pt}{12pt}\selectfont%
+		\sffamily%
+		Relatore%
+		\protect\newline%
+		\sffamily%
+		\FSSapienzaPrintRelatore%
+	}%
+	}{%
+	    \begin{tabularx}{\FSSapienzaTabularLength}{@{}Xl}%
+			\fontsize{10pt}{12pt}\selectfont%
+			\sffamily%
+			Relatore%
+			&%
+			\fontsize{10pt}{12pt}\selectfont%
+			\sffamily%
+			Correlatore \\%
+			\fontsize{10pt}{12pt}\selectfont%
+			\sffamily%
+			\FSSapienzaPrintRelatore%
+			&%
+			\fontsize{10pt}{12pt}\selectfont%
+			\sffamily%
+			\FSSapienzaPrintCorrelatore \\%
+		\end{tabularx}%
+	}%
+	\par%
+}
+
+\newcommand{\FSSapienzaMakeAnnoAccademico}{%
+	\vspace{\FSSapienzaSpazioAnnoAccademico}%
+	{%
+		\fontsize{10pt}{12pt}\selectfont%
+		\noindent%
+		\sffamily%
+		A/A \FSSapienzaPrintAnnoAccademico%
+		\par%
+	}%
+}
+
+\renewcommand{\maketitle}{%
+	% margins as suggested by Sapienza
+	\newgeometry{left=4cm,top=2.75cm,right=2.5cm,bottom=1cm}%
+	% no page number
+	\thispagestyle{empty}%
+	% Sapienza's logo
+	\FSSapienzaMakeLogo%
+	% title
+	\FSSapienzaMakeTitolo%
+	% faculty, degree and (optionally) course
+	\FSSapienzaMakeFacoltaCorsoCattedra%
+	% candidate and matricola
+	\FSSapienzaMakeCandidato%
+	% advisor and (optionally) co-advisor
+	\FSSapienzaMakeRelatoreCorrelatore%
+	% academic year
+	\FSSapienzaMakeAnnoAccademico%
+	% restore document geometry
+	\restoregeometry%
+}
