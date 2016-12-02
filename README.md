@@ -8,6 +8,11 @@ Il logo (file `.eps`) &egrave; stato ottenuto convertendo (con Inkscape) il file
 ## Istruzioni
 
 Il package modifica il comando `\maketitle` per creare una pagina di frontespizio conforme alle indicazioni Sapienza.
+
+Il file `main.tex` fornisce un esempio di utilizzo del package.
+
+### Impostare i contenuti del frontespizio
+
 Per impostare i vari campi previsti nel frontespizio usare i seguenti comandi:
 - `\FSSTitolo{[titolo]}` per impostare il titolo della tesi.
   Per inserire un a capo all'interno del titolo si pu&ograve; usare `\protect\newline`
@@ -28,12 +33,27 @@ Per impostare i vari campi previsti nel frontespizio usare i seguenti comandi:
 *Cattedra* e *Correlatore* possono non essere specificati, nel qual caso non compariranno nel frontespizio.
 Ogni altro campo deve essere specificato.
 
-Il titolo viene formattato secondo le specifiche fornite dalla Sapienza: colore titolo, facolt&agrave; e corso di laurea `RGB(111,10,25)`, font arial, 20pt per titolo, 10pt per il resto, grassetto per facolt&agrave; e corso di laurea.
+#### Nota su relatore e correlatore
+
+Per laureandi triennali il relatore potrebbe essere chiamato "responsabile", il correlatore "co-responsabile".
+Per modificare il testo indicativo di relatore e correlatore, usare i comandi `\FSSTestoRelatore{[testo]}` e `\FSSTestoCorrelatore{[testo]}`.
+Entrambi i campi sono inizialmente impostati come *Relatore* e *Correlatore*.
+
+### Stile del frontespizio
+
+Il titolo viene formattato secondo le specifiche fornite dalla Sapienza:
+- titolo, facolt&agrave; e corso di laurea in colore `RGB(111,10,25)`;
+- font arial;
+- 20pt per titolo, 10pt per il resto;
+- grassetto per facolt&agrave; e corso di laurea.
+
 Il testo &egrave; allineato a sinistra, sulla *S* del logo Sapienza.
 Le impostazioni specificate non influiscono sul resto del documento.
 
 I margini sono impostati (sx,sup,dx,inf) a 4cm, 2.75cm, 2.5cm, 1cm.
 Non influiscono sui margini nel resto del documento.
+
+### Impostare gli spazi
 
 I campi vengono stampati nel seguente ordine:
 
@@ -51,6 +71,4 @@ I campi vengono stampati nel seguente ordine:
 - `\FSSapienzaSpazioAnnoAccademico` imposta lo spazio fra relatore e anno accademico.
 
 Lo spazio fra i campi viene impostato con `\setlength{[nome spazio]}{[valore]}`.
-
-Il file `main.tex` fornisce un esempio di utilizzo del package.
 

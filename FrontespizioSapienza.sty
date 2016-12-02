@@ -54,9 +54,17 @@
 \newcommand{\FSSCorrelatore}[1]{\def\@FSS@Correlatore{#1}}
 \newcommand{\FSSAnnoAccademico}[1]{\def\@FSS@AnnoAccademico{#1}}
 
+% commands to set text for relatore/correlatore
+\newcommand{\FSSTestoRelatore}[1]{\def\@FSS@Testo@Relatore{#1}}
+\newcommand{\FSSTestoCorrelatore}[1]{\def\@FSS@Testo@Correlatore{#1}}
+
 % empty defaults
 \def\@FSS@Cattedra{}
 \def\@FSS@Correlatore{}
+
+% text default for relatore/correlatore
+\def\@FSS@Testo@Relatore{Relatore}
+\def\@FSS@Testo@Correlatore{Correlatore}
 
 % print info commands
 \def\FSSapienzaPrintTitolo{\@FSS@Titolo}
@@ -68,6 +76,9 @@
 \def\FSSapienzaPrintRelatore{\@FSS@Relatore}
 \def\FSSapienzaPrintCorrelatore{\@FSS@Correlatore}
 \def\FSSapienzaPrintAnnoAccademico{\@FSS@AnnoAccademico}
+
+\def\FSSapienzaPrintTestoRelatore{\@FSS@Testo@Relatore}
+\def\FSSapienzaPrintTestoCorrelatore{\@FSS@Testo@Correlatore}
 
 % check if info available
 \def\skipCattedra{\equal{\@FSS@Cattedra}{}}
@@ -145,7 +156,7 @@
 	{%
 		\fontsize{10pt}{12pt}\selectfont%
 		\sffamily%
-		Relatore%
+		\FSSapienzaPrintTestoRelatore%
 		\protect\newline%
 		\sffamily%
 		\FSSapienzaPrintRelatore%
@@ -154,11 +165,11 @@
 	    \begin{tabularx}{\FSSapienzaTabularLength}{@{}Xl}%
 			\fontsize{10pt}{12pt}\selectfont%
 			\sffamily%
-			Relatore%
+			\FSSapienzaPrintTestoRelatore%
 			&%
 			\fontsize{10pt}{12pt}\selectfont%
 			\sffamily%
-			Correlatore \\%
+			\FSSapienzaPrintTestoCorrelatore \\%
 			\fontsize{10pt}{12pt}\selectfont%
 			\sffamily%
 			\FSSapienzaPrintRelatore%
